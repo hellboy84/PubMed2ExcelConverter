@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PubMed 文献リスト Excel/CSV Converter</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+  :root {
+    --bg: #f7f6f3;
+    --surface: #ffffff;
+    --surface-alt: #edecea;
+    --border: #d8d5cf;
+    --text: #2c2a25;
+    --text-muted: #78756e;
+    --accent: #1a6b4e;
+    --accent-light: #e8f5ee;
+    --accent-hover: #145a40;
+    --blue: #2563b4;
+    --blue-light: #e8f0fb;
+    --blue-hover: #1d4f94;
+    --danger: #c0392b;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+    --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+    --radius: 10px;
+    --radius-lg: 16px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', 'Noto Sans JP', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  header .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--accent);
+    color: #fff;
+    padding: 6px 16px 6px 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  header .logo svg { flex-shrink: 0; }
+
+  header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
+
+  header h1 span { color: var(--accent); }
+
+  header p {
+    color: var(--text-muted);
+    font-size: 15px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: 32px;
+    margin-bottom: 24px;
+  }
+
+  .card h2 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .card h2 .step {
+    background: var(--accent);
+    color: #fff;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .dropzone {
+    border: 2px dashed var(--border);
+    border-radius: var(--radius);
+    padding: 48px 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+  }
+
+  .dropzone:hover, .dropzone.dragover {
+    border-color: var(--accent);
+    background: var(--accent-light);
+  }
+
+  .dropzone.dragover { transform: scale(1.01); }
+  .dropzone svg { color: var(--text-muted); margin-bottom: 12px; }
+  .dropzone.dragover svg { color: var(--accent); }
+  .dropzone p { color: var(--text-muted); font-size: 14px; }
+
+  .dropzone p strong {
+    color: var(--accent);
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .dropzone .subtext {
+    font-size: 12px;
+    margin-top: 4px;
+    color: var(--text-muted);
+    opacity: 0.7;
+  }
+
+  .dropzone input[type="file"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .file-info {
+    display: none;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: var(--accent-light);
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
+    font-size: 14px;
+  }
+
+  .file-info.show { display: flex; }
+
+  .file-info .fname {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    flex: 1;
+  }
+
+  .file-info .count {
+    font-weight: 600;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  .file-info .remove-btn {
+    background: none;
+    border: none;
+    color: var(--danger);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+  }
+
+  .file-info .remove-btn:hover { background: rgba(192,57,43,0.1); }
+
+  .options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  @media (max-width: 600px) {
+    .options-grid { grid-template-columns: 1fr; }
+  }
+
+  .field-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: var(--bg);
+    border-radius: 8px;
+    font-size: 13px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+  }
+
+  .field-toggle:hover { background: var(--surface-alt); }
+
+  .field-toggle input[type="checkbox"] {
+    accent-color: var(--accent);
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+  }
+
+  .field-toggle .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    background: var(--surface);
+    padding: 1px 6px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    margin-left: auto;
+  }
+
+  .actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background: var(--accent-hover);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+  }
+
+  .btn-primary:disabled, .btn-excel:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  .btn-excel {
+    background: var(--blue);
+    color: #fff;
+  }
+
+  .btn-excel:hover:not(:disabled) {
+    background: var(--blue-hover);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+  }
+
+  .btn-secondary {
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+
+  .btn-secondary:hover { background: var(--surface-alt); }
+
+  .format-hints {
+    display: flex;
+    gap: 16px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+  }
+
+  .format-hint {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .format-hint .badge {
+    flex-shrink: 0;
+    padding: 1px 7px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 11px;
+  }
+
+  .badge-xlsx {
+    background: var(--blue-light);
+    color: var(--blue);
+    border: 1px solid var(--blue);
+  }
+
+  .badge-csv {
+    background: var(--accent-light);
+    color: var(--accent);
+    border: 1px solid var(--accent);
+  }
+
+  .csv-options {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .csv-options select {
+    font-family: inherit;
+    font-size: 12px;
+    padding: 5px 8px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--surface);
+    color: var(--text);
+    cursor: pointer;
+  }
+
+  .preview-wrapper {
+    display: none;
+    margin-top: 16px;
+  }
+
+  .preview-wrapper.show { display: block; }
+
+  .preview-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+
+  .preview-header span {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .preview-table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+
+  .preview-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    font-family: 'JetBrains Mono', 'Noto Sans JP', monospace;
+    white-space: nowrap;
+  }
+
+  .preview-table th {
+    background: var(--surface-alt);
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 2px solid var(--border);
+    position: sticky;
+    top: 0;
+  }
+
+  .preview-table td {
+    padding: 6px 12px;
+    border-bottom: 1px solid var(--border);
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .preview-table tr:hover td { background: var(--accent-light); }
+
+  .status {
+    display: none;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-top: 16px;
+  }
+
+  .status.show { display: block; }
+
+  .status.success {
+    background: var(--accent-light);
+    color: var(--accent);
+    border: 1px solid var(--accent);
+  }
+
+  .status.error {
+    background: #fdecea;
+    color: var(--danger);
+    border: 1px solid var(--danger);
+  }
+
+  .status.warn {
+    background: #fef9e7;
+    color: #8a6d00;
+    border: 1px solid #d4ac0d;
+  }
+
+  footer {
+    text-align: center;
+    margin-top: 48px;
+    color: var(--text-muted);
+    font-size: 12px;
+    line-height: 1.8;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div class="logo">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      文献リスト → Excel / CSV
+    </div>
+    <h1>PubMed <span>文献リスト</span> Excel/CSV Converter</h1>
+    <p>PubMedからダウンロードした文献リスト(.txt / .nbib)を、Excelファイル(.xlsx)またはCSVファイル(.csv)に変換します。複数ファイルの投入が可能です。重複するデータはPMIDを確認して削除します。すべての処理はローカルのブラウザ上で行われ、データは外部に送信されません。</p>
+  </header>
+
+  <!-- Step 1 -->
+  <div class="card">
+    <h2><span class="step">1</span> ファイルを選択</h2>
+    <div class="dropzone" id="dropzone">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      <p><strong>クリックしてファイルを選択</strong> またはここにドラッグ&amp;ドロップ</p>
+      <p class="subtext">.txt /.nbib （MEDLINE / PubMed形式）── 複数ファイルの同時選択・追加に対応</p>
+      <input type="file" id="fileInput" accept=".nbib,.txt,.medline" multiple>
+    </div>
+    <div id="fileListArea" style="display:none;">
+      <div id="fileList" style="display:flex; flex-direction:column; gap:6px;"></div>
+      <div style="display:flex; align-items:center; gap:8px; margin-top:10px;">
+        <span id="totalCount" style="font-size:14px; font-weight:600; color:var(--accent);"></span>
+        <button class="btn btn-secondary" id="clearAllBtn" style="padding:5px 12px; font-size:12px; color:var(--danger); margin-left:auto;">すべて削除</button>
+      </div>
+      <div class="dropzone" id="addDropzone" style="padding:20px 16px; margin-top:10px;">
+        <p style="font-size:13px;"><strong>クリックしてファイルを追加</strong> またはここにドラッグ&amp;ドロップ</p>
+        <p class="subtext">PMIDが重複するレコードは自動的に除去されます</p>
+        <input type="file" id="addFileInput" accept=".nbib,.txt,.medline" multiple>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 2 -->
+  <div class="card">
+    <h2><span class="step">2</span> 出力フィールドを選択</h2>
+    <div style="display:flex; gap:8px; margin-bottom:12px;">
+      <button class="btn btn-secondary" id="selectAllBtn" style="padding:6px 14px; font-size:12px;">全選択</button>
+      <button class="btn btn-secondary" id="resetDefaultBtn" style="padding:6px 14px; font-size:12px;">初期値に戻す</button>
+    </div>
+    <div class="options-grid" id="fieldsGrid"></div>
+  </div>
+
+  <!-- Step 3 -->
+  <div class="card">
+    <h2><span class="step">3</span> 変換 &amp; ダウンロード</h2>
+    <div class="actions">
+      <button class="btn btn-excel" id="xlsxBtn" disabled>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/><path d="M3 9h18"/><path d="M3 15h18"/></svg>
+        Excel(.xlsx)でダウンロード
+      </button>
+      <button class="btn btn-primary" id="csvBtn" disabled>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
+        CSV(.csv) でダウンロード
+      </button>
+      <div class="csv-options">
+        <label for="encoding">CSV文字コード:</label>
+        <select id="encoding">
+          <option value="utf8bom" selected>UTF-8 BOM付き</option>
+          <option value="utf8">UTF-8</option>
+        </select>
+      </div>
+    </div>
+    <div class="format-hints">
+      <div class="format-hint">
+        <span class="badge badge-xlsx">xlsx</span>
+        全カラムを文字列として扱います。Excelで開いた際に「1-24」→「1月24日」等の自動変換を防止できます。
+      </div>
+      <div class="format-hint">
+        <span class="badge badge-csv">csv</span>
+        非Excel依存。R・Python・Googleスプレッドシートなどの多様な環境で利用する場合はこちら。
+      </div>
+    </div>
+    <div class="status" id="status"></div>
+    <div class="preview-wrapper" id="previewWrapper">
+      <div class="preview-header">
+        <span id="previewLabel"></span>
+        <button class="btn btn-secondary" id="previewToggle" style="padding:6px 14px; font-size:12px;">プレビューを閉じる</button>
+      </div>
+      <div class="preview-table-wrap" style="max-height:360px; overflow-y:auto;">
+        <table class="preview-table" id="previewTable"></table>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    PubMed 文献リスト Excel/CSV Converter &mdash; Open Source Tool<br>
+    &copy; 2026 hellboy84 &mdash; Released under the <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener noreferrer" style="color:var(--text-muted);">MIT License</a>
+  </footer>
+</div>
+
+<script>
+// ── Field Definitions ──
+const FIELDS = [
+  { key: 'PMID',  label: 'PMID',               tag: 'PMID',  checked: true },
+  { key: 'LA',    label: '言語',                tag: 'LA',    checked: true },
+  { key: 'AU',    label: '著者(略称)',           tag: 'AU',    checked: true },
+  { key: 'FAU',   label: '著者(フル)',           tag: 'FAU',   checked: false },
+  { key: 'TI',    label: '論題',                tag: 'TI',    checked: true },
+  { key: 'TA',    label: '雑誌名(略称)',         tag: 'TA',    checked: true },
+  { key: 'JT',    label: '雑誌名(フル)',         tag: 'JT',    checked: false },
+  { key: 'DP',    label: '出版年',              tag: 'DP',    checked: true },
+  { key: 'VI',    label: '巻',                  tag: 'VI',    checked: true },
+  { key: 'IP',    label: '号',                  tag: 'IP',    checked: true },
+  { key: 'PG',    label: 'ページ',              tag: 'PG',    checked: true },
+  { key: 'PT',    label: '出版タイプ',           tag: 'PT',    checked: true },
+  { key: 'AB',    label: '抄録',                tag: 'AB',    checked: true },
+  { key: 'OT',    label: '著者キーワード',       tag: 'OT',    checked: false },
+  { key: 'MH',    label: 'MeSH用語',            tag: 'MH',    checked: false },
+  { key: 'DOI',   label: 'DOI',                 tag: 'AID',   checked: false, filter: 'doi' },
+  { key: 'IS',    label: 'ISSN',                tag: 'IS',    checked: false },
+  { key: 'AD',    label: '著者所属',             tag: 'AD',    checked: false },
+];
+
+let parsedRecords = [];
+const EXCEL_CELL_LIMIT = 30000;
+
+// ── Build Checkboxes ──
+const fieldsGrid = document.getElementById('fieldsGrid');
+FIELDS.forEach(f => {
+  const label = document.createElement('label');
+  label.className = 'field-toggle';
+  label.innerHTML = `<input type="checkbox" data-key="${f.key}" ${f.checked ? 'checked' : ''}> ${f.label} <span class="tag">${f.tag}${f.filter ? ' ['+f.filter+']' : ''}</span>`;
+  fieldsGrid.appendChild(label);
+});
+
+// ── Select All / Reset Default ──
+document.getElementById('selectAllBtn').addEventListener('click', () => {
+  fieldsGrid.querySelectorAll('input[type="checkbox"]').forEach(cb => { cb.checked = true; });
+});
+document.getElementById('resetDefaultBtn').addEventListener('click', () => {
+  fieldsGrid.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+    const f = FIELDS.find(f => f.key === cb.dataset.key);
+    cb.checked = f ? f.checked : false;
+  });
+});
+
+// ── DOM refs ──
+const dropzone      = document.getElementById('dropzone');
+const fileInput      = document.getElementById('fileInput');
+const fileListArea   = document.getElementById('fileListArea');
+const fileListEl     = document.getElementById('fileList');
+const totalCountEl   = document.getElementById('totalCount');
+const addFileInput   = document.getElementById('addFileInput');
+const clearAllBtn    = document.getElementById('clearAllBtn');
+const xlsxBtn        = document.getElementById('xlsxBtn');
+const csvBtn         = document.getElementById('csvBtn');
+const statusEl       = document.getElementById('status');
+const previewWrapper = document.getElementById('previewWrapper');
+const previewTable   = document.getElementById('previewTable');
+const previewLabel   = document.getElementById('previewLabel');
+const previewToggle  = document.getElementById('previewToggle');
+
+let loadedFiles = [];
+let duplicateCount = 0;
+
+function updateParsedRecords() {
+  const all = loadedFiles.flatMap(f => f.records);
+  const seen = new Set();
+  parsedRecords = [];
+  duplicateCount = 0;
+  for (const rec of all) {
+    const pmid = rec['PMID'];
+    if (pmid && seen.has(pmid)) { duplicateCount++; continue; }
+    if (pmid) seen.add(pmid);
+    parsedRecords.push(rec);
+  }
+}
+
+// ── File Handling ──
+dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.classList.add('dragover'); });
+dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
+dropzone.addEventListener('drop', e => {
+  e.preventDefault();
+  dropzone.classList.remove('dragover');
+  if (e.dataTransfer.files.length) handleFiles(e.dataTransfer.files);
+});
+fileInput.addEventListener('change', e => {
+  if (e.target.files.length) handleFiles(e.target.files);
+});
+const addDropzone = document.getElementById('addDropzone');
+addDropzone.addEventListener('dragover', e => { e.preventDefault(); addDropzone.classList.add('dragover'); });
+addDropzone.addEventListener('dragleave', () => addDropzone.classList.remove('dragover'));
+addDropzone.addEventListener('drop', e => {
+  e.preventDefault();
+  addDropzone.classList.remove('dragover');
+  if (e.dataTransfer.files.length) handleFiles(e.dataTransfer.files);
+});
+addFileInput.addEventListener('change', e => {
+  if (e.target.files.length) handleFiles(e.target.files);
+  addFileInput.value = '';
+});
+clearAllBtn.addEventListener('click', resetState);
+
+function resetState() {
+  parsedRecords = [];
+  loadedFiles = [];
+  fileInput.value = '';
+  dropzone.style.display = '';
+  fileListArea.style.display = 'none';
+  fileListEl.innerHTML = '';
+  xlsxBtn.disabled = true;
+  csvBtn.disabled = true;
+  statusEl.classList.remove('show');
+  previewWrapper.classList.remove('show');
+}
+
+function handleFiles(files) {
+  let pending = files.length;
+  let hasError = false;
+  for (const file of files) {
+    const reader = new FileReader();
+    reader.onload = e => {
+      const text = e.target.result.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+      const records = parseNBIB(text);
+      if (records.length === 0) {
+        hasError = true;
+      } else {
+        loadedFiles.push({ name: file.name, records });
+      }
+      pending--;
+      if (pending === 0) onAllFilesLoaded(hasError);
+    };
+    reader.readAsText(file, 'UTF-8');
+  }
+}
+
+function onAllFilesLoaded(hasError) {
+  updateParsedRecords();
+  if (parsedRecords.length === 0) {
+    showStatus('error', 'MEDLINE/NBIB形式の文献レコードが見つかりませんでした。ファイルを確認してください。');
+    return;
+  }
+  if (hasError) {
+    showStatus('warn', '一部のファイルからレコードを読み取れませんでした。');
+  } else {
+    statusEl.classList.remove('show');
+  }
+  renderFileList();
+}
+
+function renderFileList() {
+  fileListEl.innerHTML = '';
+  loadedFiles.forEach((f, i) => {
+    const div = document.createElement('div');
+    div.className = 'file-info show';
+    div.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>`
+      + `<span class="fname">${escapeHtml(f.name)}</span>`
+      + `<span class="count">${f.records.length} 件</span>`
+      + `<button class="remove-btn" title="このファイルを削除"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>`;
+    div.querySelector('.remove-btn').addEventListener('click', () => removeFileAt(i));
+    fileListEl.appendChild(div);
+  });
+  updateParsedRecords();
+  const dupText = duplicateCount > 0 ? `　※ PMID重複 ${duplicateCount} 件を除去` : '';
+  totalCountEl.textContent = `合計 ${parsedRecords.length} 件（${loadedFiles.length} ファイル）${dupText}`;
+  dropzone.style.display = 'none';
+  fileListArea.style.display = '';
+  xlsxBtn.disabled = (typeof XLSX === 'undefined');
+  csvBtn.disabled = false;
+  previewWrapper.classList.remove('show');
+}
+
+function removeFileAt(idx) {
+  loadedFiles.splice(idx, 1);
+  if (loadedFiles.length === 0) { resetState(); return; }
+  renderFileList();
+}
+
+// ── NBIB Parser ──
+function parseNBIB(text) {
+  const records = [];
+  const blocks = text.split(/\n\n+/);
+  let currentRecord = null;
+  let currentTag = '';
+  const multiTags = new Set(['AU','FAU','AD','MH','OT','PT','AID','IS','LA']);
+
+  for (const block of blocks) {
+    for (const line of block.split('\n')) {
+      const tagMatch = line.match(/^([A-Z]{2,4})\s*-\s?(.*)/);
+      const contMatch = line.match(/^\s{2,}(.*)/);
+
+      if (tagMatch) {
+        const tag = tagMatch[1].trim();
+        const value = tagMatch[2].trim();
+
+        if (tag === 'PMID') {
+          if (currentRecord) records.push(currentRecord);
+          currentRecord = {};
+        }
+        if (!currentRecord) continue;
+        currentTag = tag;
+
+        if (multiTags.has(tag)) {
+          if (!currentRecord[tag]) currentRecord[tag] = [];
+          currentRecord[tag].push(value);
+        } else {
+          currentRecord[tag] = value;
+        }
+      } else if (contMatch && currentRecord && currentTag) {
+        const val = contMatch[1].trim();
+        if (multiTags.has(currentTag) && Array.isArray(currentRecord[currentTag])) {
+          currentRecord[currentTag][currentRecord[currentTag].length - 1] += ' ' + val;
+        } else if (typeof currentRecord[currentTag] === 'string') {
+          currentRecord[currentTag] += ' ' + val;
+        }
+      }
+    }
+  }
+  if (currentRecord && currentRecord['PMID']) records.push(currentRecord);
+  return records;
+}
+
+// ── Field value extraction ──
+function getFieldValue(record, field) {
+  if (field.key === 'DOI') {
+    const aids = record['AID'] || [];
+    const doi = aids.find(a => a.toLowerCase().includes('[doi]'));
+    return doi ? doi.replace(/\s*\[doi\]\s*/i, '').trim() : '';
+  }
+  if (field.key === 'DP') {
+    const dp = record['DP'] || '';
+    const m = dp.match(/^\d{4}/);
+    return m ? m[0] : dp;
+  }
+  const val = record[field.tag];
+  if (!val) return '';
+  return Array.isArray(val) ? val.join('; ') : val;
+}
+
+function getSelectedFields() {
+  const selected = [];
+  fieldsGrid.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+    if (cb.checked) {
+      const f = FIELDS.find(f => f.key === cb.dataset.key);
+      if (f) selected.push(f);
+    }
+  });
+  return selected;
+}
+
+function buildDataMatrix(selected) {
+  const headers = selected.map(f => f.label === f.key ? f.label : f.label + '(' + f.key + ')');
+  const rows = parsedRecords.map(rec => selected.map(f => getFieldValue(rec, f)));
+  return { headers, rows };
+}
+
+// ══════════════════════════════════════
+//  XLSX Download — all cells forced to text
+// ══════════════════════════════════════
+xlsxBtn.addEventListener('click', () => {
+  const selected = getSelectedFields();
+  if (selected.length === 0) {
+    showStatus('error', '少なくとも1つのフィールドを選択してください。');
+    return;
+  }
+
+  const { headers, rows } = buildDataMatrix(selected);
+
+  // Build worksheet manually: every cell = { t:'s', v: string }
+  const ws = {};
+  const range = { s: { c: 0, r: 0 }, e: { c: headers.length - 1, r: rows.length } };
+
+  // Header row (bold via style would need xlsx-style; we just set as text)
+  headers.forEach((h, c) => {
+    ws[XLSX.utils.encode_cell({ c, r: 0 })] = { t: 's', v: h };
+  });
+
+  // Data rows — ALL cells as explicit string type (truncate at EXCEL_CELL_LIMIT)
+  let truncatedCount = 0;
+  const truncatedPMIDs = new Set();
+  rows.forEach((row, r) => {
+    row.forEach((val, c) => {
+      let s = String(val);
+      if (s.length > EXCEL_CELL_LIMIT) {
+        s = s.substring(0, EXCEL_CELL_LIMIT) + '…[truncated]';
+        truncatedCount++;
+        const pmid = parsedRecords[r]['PMID'];
+        if (pmid) truncatedPMIDs.add(pmid);
+      }
+      ws[XLSX.utils.encode_cell({ c, r: r + 1 })] = { t: 's', v: s };
+    });
+  });
+
+  ws['!ref'] = XLSX.utils.encode_range(range);
+
+  // Auto column widths (capped at 60)
+  ws['!cols'] = headers.map((h, c) => {
+    let maxLen = h.length;
+    for (const row of rows) {
+      const len = String(row[c]).length;
+      if (len > maxLen) maxLen = len;
+    }
+    return { wch: Math.min(Math.max(maxLen + 2, 10), 60) };
+  });
+
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'PubMed');
+  XLSX.writeFile(wb, 'pubmed_export.xlsx');
+
+  const dupMsg1 = duplicateCount > 0 ? `(PMID重複 ${duplicateCount} 件を除去)` : '';
+  const truncMsg = truncatedCount > 0
+    ? `\n※ ${truncatedCount} 件のセルが${EXCEL_CELL_LIMIT.toLocaleString()}文字で切り詰められました（対象PMID: ${[...truncatedPMIDs].join(', ')}）。完全なデータはCSVで出力可能です。`
+    : '';
+  showStatus(truncatedCount > 0 ? 'warn' : 'success',
+    `✓ ${parsedRecords.length} 件のレコードを Excel(.xlsx)でダウンロード${dupMsg1}。全セルがテキスト形式で保存されています。${truncMsg}`);
+  showPreview(selected);
+});
+
+// ══════════════════════════════════════
+//  CSV Download
+// ══════════════════════════════════════
+csvBtn.addEventListener('click', () => {
+  const selected = getSelectedFields();
+  if (selected.length === 0) {
+    showStatus('error', '少なくとも1つのフィールドを選択してください。');
+    return;
+  }
+
+  const { headers, rows } = buildDataMatrix(selected);
+  const csvLines = [
+    headers.map(csvEscape).join(','),
+    ...rows.map(row => row.map(csvEscape).join(','))
+  ];
+  const csvContent = csvLines.join('\n');
+
+  const enc = document.getElementById('encoding').value;
+  let blob;
+  if (enc === 'utf8bom') {
+    blob = new Blob([new Uint8Array([0xEF, 0xBB, 0xBF]), csvContent], { type: 'text/csv;charset=utf-8' });
+  } else {
+    blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8' });
+  }
+
+  downloadBlob(blob, 'pubmed_export.csv');
+  const dupMsg2 = duplicateCount > 0 ? `(PMID重複 ${duplicateCount} 件を除去)` : '';
+  showStatus('success', `✓ ${parsedRecords.length} 件のレコードを CSV(.csv) でダウンロード${dupMsg2}。`);
+  showPreview(selected);
+});
+
+function csvEscape(val) {
+  const s = String(val);
+  if (s.includes('"') || s.includes(',') || s.includes('\n') || s.includes('\r')) {
+    return '"' + s.replace(/"/g, '""') + '"';
+  }
+  return s;
+}
+
+function downloadBlob(blob, filename) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+// ── Status & Preview ──
+function showStatus(type, msg) {
+  statusEl.className = 'status show ' + type;
+  statusEl.textContent = msg;
+}
+
+function showPreview(selected) {
+  previewWrapper.classList.add('show');
+  const n = Math.min(5, parsedRecords.length);
+  previewLabel.textContent = `プレビュー（先頭 ${n} 件 / 全 ${parsedRecords.length} 件）`;
+
+  let html = '<thead><tr>';
+  selected.forEach(f => { html += `<th>${escapeHtml(f.label)}</th>`; });
+  html += '</tr></thead><tbody>';
+
+  for (let i = 0; i < n; i++) {
+    html += '<tr>';
+    selected.forEach(f => {
+      let v = getFieldValue(parsedRecords[i], f);
+      const full = v;
+      if (v.length > 120) v = v.substring(0, 120) + '…';
+      html += `<td title="${escapeHtml(full)}">${escapeHtml(v)}</td>`;
+    });
+    html += '</tr>';
+  }
+  html += '</tbody>';
+  previewTable.innerHTML = html;
+}
+
+function escapeHtml(s) {
+  const d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+
+previewToggle.addEventListener('click', () => {
+  previewWrapper.classList.toggle('show');
+  previewToggle.textContent = previewWrapper.classList.contains('show') ? 'プレビューを閉じる' : 'プレビューを表示';
+});
+
+// ── SheetJS load check ──
+window.addEventListener('load', () => {
+  if (typeof XLSX === 'undefined') {
+    showStatus('warn', '⚠ SheetJSライブラリの読み込みに失敗しました。Excel出力は使用できませんが、CSV出力は利用可能です。オフラインで使用する場合は、一度オンラインでページを開いてからご利用ください。');
+    xlsxBtn.disabled = true;
+  }
+});
+</script>
+
+</body>
+</html>

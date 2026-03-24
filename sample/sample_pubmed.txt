@@ -1,0 +1,494 @@
+﻿PMID- 32008623
+OWN - NLM
+STAT- MEDLINE
+DCOM- 20201104
+LR  - 20201104
+IS  - 1557-8216 (Electronic)
+IS  - 0272-5231 (Linking)
+VI  - 41
+IP  - 1
+DP  - 2020 Mar
+TI  - Lung Cancer 2020: Epidemiology, Etiology, and Prevention.
+PG  - 1-24
+LID - S0272-5231(19)30080-2 [pii]
+LID - 10.1016/j.ccm.2019.10.001 [doi]
+CI  - Copyright © 2019 Elsevier Inc. All rights reserved.
+FAU - Bade, Brett C
+AU  - Bade BC
+AD  - Department of Medicine, Section of Pulmonary, Critical Care, and Sleep Medicine, 
+      Yale University School of Medicine, PO Box 208057, 300 Cedar Street TAC-441 
+      South, New Haven, CT 06520-8057, USA.
+FAU - Dela Cruz, Charles S
+AU  - Dela Cruz CS
+AD  - Department of Medicine, Section of Pulmonary, Critical Care, and Sleep Medicine, 
+      Yale University School of Medicine, PO Box 208057, 300 Cedar Street TAC-441 
+      South, New Haven, CT 06520-8057, USA. Electronic address: 
+      charles.delacruz@yale.edu.
+LA  - eng
+PT  - Historical Article
+PT  - Journal Article
+PT  - Review
+PL  - United States
+TA  - Clin Chest Med
+JT  - Clinics in chest medicine
+JID - 7907612
+SB  - IM
+MH  - History, 21st Century
+MH  - Humans
+MH  - Lung Neoplasms/*epidemiology/*etiology/*prevention & control
+OTO - NOTNLM
+OT  - Epidemiology
+OT  - Etiology
+OT  - Lung cancer
+OT  - Prevention
+OT  - Tobacco smoking
+COIS- Conflicts of Interest None.
+EDAT- 2020/02/06 06:00
+MHDA- 2020/11/05 06:00
+CRDT- 2020/02/04 06:00
+PHST- 2020/02/04 06:00 [entrez]
+PHST- 2020/02/06 06:00 [pubmed]
+PHST- 2020/11/05 06:00 [medline]
+AID - S0272-5231(19)30080-2 [pii]
+AID - 10.1016/j.ccm.2019.10.001 [doi]
+PST - ppublish
+SO  - Clin Chest Med. 2020 Mar;41(1):1-24. doi: 10.1016/j.ccm.2019.10.001.
+
+PMID- 40076671
+OWN - NLM
+STAT- MEDLINE
+DCOM- 20250513
+LR  - 20250513
+IS  - 1422-0067 (Electronic)
+IS  - 1422-0067 (Linking)
+VI  - 26
+IP  - 5
+DP  - 2025 Feb 26
+TI  - Lung Cancer-Epidemiology, Pathogenesis, Treatment and Molecular Aspect (Review of 
+      Literature).
+LID - 10.3390/ijms26052049 [doi]
+LID - 2049
+FAU - Smolarz, Beata
+AU  - Smolarz B
+AUID- ORCID: 0000-0003-3168-062X
+AD  - Laboratory of Cancer Genetics, Department of Pathology, Polish Mother's Memorial 
+      Hospital Research Institute, 93-338 Lodz, Poland.
+FAU - Łukasiewicz, Honorata
+AU  - Łukasiewicz H
+AD  - Faculty of Medicine and Health Sciences, Department of Nursing, The President 
+      Stanisław Wojciechowski Calisia University, 62-800 Kalisz, Poland.
+FAU - Samulak, Dariusz
+AU  - Samulak D
+AD  - Department of Obstetrics and Gynecology and Gynecological Oncology, Regional 
+      Hospital in Kalisz, 62-800 Kalisz, Poland.
+AD  - Department of Obstetrics, The President Stanisław Wojciechowski Calisia 
+      University, 62-800 Kalisz, Poland.
+FAU - Piekarska, Ewa
+AU  - Piekarska E
+AD  - Regional Hospital in Kalisz, 62-800 Kalisz, Poland.
+FAU - Kołaciński, Radosław
+AU  - Kołaciński R
+AD  - Regional Hospital in Kalisz, 62-800 Kalisz, Poland.
+FAU - Romanowicz, Hanna
+AU  - Romanowicz H
+AD  - Laboratory of Cancer Genetics, Department of Pathology, Polish Mother's Memorial 
+      Hospital Research Institute, 93-338 Lodz, Poland.
+LA  - eng
+PT  - Journal Article
+PT  - Review
+DEP - 20250226
+PL  - Switzerland
+TA  - Int J Mol Sci
+JT  - International journal of molecular sciences
+JID - 101092791
+RN  - EC 2.7.10.1 (ErbB Receptors)
+RN  - 0 (Protein Kinase Inhibitors)
+SB  - IM
+MH  - Humans
+MH  - *Lung Neoplasms/epidemiology/therapy/etiology/pathology/genetics
+MH  - Mutation
+MH  - ErbB Receptors/genetics
+MH  - Protein Kinase Inhibitors/therapeutic use
+MH  - Molecular Targeted Therapy
+PMC - PMC11900952
+OTO - NOTNLM
+OT  - genetics
+OT  - lung cancer
+OT  - pathogenesis
+OT  - treatment
+COIS- The authors declare no conflicts of interest.
+EDAT- 2025/03/13 06:27
+MHDA- 2025/03/13 06:28
+PMCR- 2025/02/26
+CRDT- 2025/03/13 01:06
+PHST- 2025/01/27 00:00 [received]
+PHST- 2025/02/14 00:00 [revised]
+PHST- 2025/02/25 00:00 [accepted]
+PHST- 2025/03/13 06:28 [medline]
+PHST- 2025/03/13 06:27 [pubmed]
+PHST- 2025/03/13 01:06 [entrez]
+PHST- 2025/02/26 00:00 [pmc-release]
+AID - ijms26052049 [pii]
+AID - ijms-26-02049 [pii]
+AID - 10.3390/ijms26052049 [doi]
+PST - epublish
+SO  - Int J Mol Sci. 2025 Feb 26;26(5):2049. doi: 10.3390/ijms26052049.
+
+PMID- 29700092
+OWN - NLM
+STAT- MEDLINE
+DCOM- 20191007
+LR  - 20240426
+IS  - 1473-4893 (Electronic)
+IS  - 1470-2118 (Print)
+IS  - 1470-2118 (Linking)
+VI  - 18
+IP  - Suppl 2
+DP  - 2018 Apr 1
+TI  - Recent advances in the management of lung cancer.
+PG  - s41-s46
+LID - 10.7861/clinmedicine.18-2-s41 [doi]
+CI  - © Royal College of Physicians 2018. All rights reserved.
+FAU - Jones, Gavin S
+AU  - Jones GS
+AD  - Division of Epidemiology and Public Health, University of Nottingham, Nottingham, 
+      UK.
+FAU - Baldwin, David R
+AU  - Baldwin DR
+AD  - Division of Epidemiology and Public Health, University of Nottingham, Nottingham, 
+      UK David.Baldwin@nottingham.ac.uk.
+AD  - Department of Respiratory Medicine, Nottingham University hospitals, Nottingham, 
+      UK.
+LA  - eng
+PT  - Journal Article
+PT  - Review
+PL  - England
+TA  - Clin Med (Lond)
+JT  - Clinical medicine (London, England)
+JID - 101092853
+SB  - IM
+MH  - Early Diagnosis
+MH  - Humans
+MH  - *Lung Neoplasms/diagnosis/pathology/therapy
+MH  - Neoplasm Staging
+PMC - PMC6334032
+OTO - NOTNLM
+OT  - Lung cancer
+OT  - curative treatment
+OT  - early diagnosis
+OT  - lung cancer management
+OT  - targeted therapies
+EDAT- 2018/04/28 06:00
+MHDA- 2019/10/08 06:00
+PMCR- 2018/04/01
+CRDT- 2018/04/28 06:00
+PHST- 2018/04/28 06:00 [entrez]
+PHST- 2018/04/28 06:00 [pubmed]
+PHST- 2019/10/08 06:00 [medline]
+PHST- 2018/04/01 00:00 [pmc-release]
+AID - S1470-2118(24)00085-X [pii]
+AID - clinmedicine [pii]
+AID - 10.7861/clinmedicine.18-2-s41 [doi]
+PST - ppublish
+SO  - Clin Med (Lond). 2018 Apr 1;18(Suppl 2):s41-s46. doi: 
+      10.7861/clinmedicine.18-2-s41.
+
+PMID- 27261907
+OWN - NLM
+STAT- MEDLINE
+DCOM- 20180412
+LR  - 20220408
+IS  - 1558-5042 (Electronic)
+IS  - 1055-3207 (Linking)
+VI  - 25
+IP  - 3
+DP  - 2016 Jul
+TI  - Epidemiology of Lung Cancer.
+PG  - 439-45
+LID - S1055-3207(16)00003-X [pii]
+LID - 10.1016/j.soc.2016.02.001 [doi]
+CI  - Copyright © 2016 Elsevier Inc. All rights reserved.
+FAU - Mao, Yousheng
+AU  - Mao Y
+AD  - Department of Thoracic Surgery, Cancer Institute and Hospital, Chinese Academy of 
+      Medical Sciences, Beijing 100021, China.
+FAU - Yang, Ding
+AU  - Yang D
+AD  - Department of Thoracic Surgery, Cancer Institute and Hospital, Chinese Academy of 
+      Medical Sciences, Beijing 100021, China.
+FAU - He, Jie
+AU  - He J
+AD  - Department of Thoracic Surgery, Cancer Institute and Hospital, Chinese Academy of 
+      Medical Sciences, Beijing 100021, China. Electronic address: prof.hejie@263.net.
+FAU - Krasna, Mark J
+AU  - Krasna MJ
+AD  - Meridian Cancer Care, Jersey Shore University Medical Center, Ackerman South-Room 
+      553, 1945 Route 33, Neptune City, NJ 07753, USA. Electronic address: 
+      MKrasna@meridianhealth.com.
+LA  - eng
+PT  - Journal Article
+PT  - Review
+PL  - United States
+TA  - Surg Oncol Clin N Am
+JT  - Surgical oncology clinics of North America
+JID - 9211789
+SB  - IM
+MH  - *Global Health
+MH  - Humans
+MH  - Lung Neoplasms/*epidemiology/etiology/prevention & control
+MH  - *Public Health
+MH  - Risk Factors
+OTO - NOTNLM
+OT  - Epidemiology
+OT  - Etiology
+OT  - Lung cancer
+EDAT- 2016/06/05 06:00
+MHDA- 2018/04/13 06:00
+CRDT- 2016/06/05 06:00
+PHST- 2016/06/05 06:00 [entrez]
+PHST- 2016/06/05 06:00 [pubmed]
+PHST- 2018/04/13 06:00 [medline]
+AID - S1055-3207(16)00003-X [pii]
+AID - 10.1016/j.soc.2016.02.001 [doi]
+PST - ppublish
+SO  - Surg Oncol Clin N Am. 2016 Jul;25(3):439-45. doi: 10.1016/j.soc.2016.02.001.
+
+PMID- 27535388
+OWN - NLM
+STAT- MEDLINE
+DCOM- 20170601
+LR  - 20220330
+IS  - 0927-3042 (Print)
+IS  - 0927-3042 (Linking)
+VI  - 170
+DP  - 2016
+TI  - Diagnosis and Molecular Classification of Lung Cancer.
+PG  - 25-46
+LID - 10.1007/978-3-319-40389-2_2 [doi]
+FAU - Rodriguez-Canales, Jaime
+AU  - Rodriguez-Canales J
+AD  - Department of Translational Molecular Pathology, Unit 951, The University of 
+      Texas MD Anderson Cancer Center, 2130 Holcombe Blvd., Houston, TX, 77030, USA.
+FAU - Parra-Cuentas, Edwin
+AU  - Parra-Cuentas E
+AD  - Department of Translational Molecular Pathology, Unit 951, The University of 
+      Texas MD Anderson Cancer Center, 2130 Holcombe Blvd., Houston, TX, 77030, USA.
+FAU - Wistuba, Ignacio I
+AU  - Wistuba II
+AD  - Department of Translational Molecular Pathology, Unit 951, The University of 
+      Texas MD Anderson Cancer Center, 2130 Holcombe Blvd., Houston, TX, 77030, USA. 
+      iiwistuba@mdanderson.org.
+LA  - eng
+PT  - Journal Article
+PT  - Review
+PL  - United States
+TA  - Cancer Treat Res
+JT  - Cancer treatment and research
+JID - 8008541
+SB  - IM
+MH  - Humans
+MH  - Lung Neoplasms/*classification/*diagnosis/*genetics
+OTO - NOTNLM
+OT  - Lung cancer
+OT  - Molecular targets
+OT  - Pathology classification
+EDAT- 2016/08/19 06:00
+MHDA- 2017/06/02 06:00
+CRDT- 2016/08/19 06:00
+PHST- 2016/08/19 06:00 [entrez]
+PHST- 2016/08/19 06:00 [pubmed]
+PHST- 2017/06/02 06:00 [medline]
+AID - 10.1007/978-3-319-40389-2_2 [doi]
+PST - ppublish
+SO  - Cancer Treat Res. 2016;170:25-46. doi: 10.1007/978-3-319-40389-2_2.
+
+PMID- 36036470
+OWN - NLM
+STAT- MEDLINE
+DCOM- 20230125
+LR  - 20230125
+IS  - 1532-4192 (Electronic)
+IS  - 0735-7907 (Linking)
+VI  - 41
+IP  - 1
+DP  - 2023 Jan
+TI  - Lung Cancer Treatment Advances in 2022.
+PG  - 12-24
+LID - 10.1080/07357907.2022.2119479 [doi]
+FAU - Abu Rous, Fawzi
+AU  - Abu Rous F
+AD  - Department of Internal Medicine, Division of Hematology and Oncology, Henry Ford 
+      Health System, Detroit, Michigan, USA.
+FAU - Singhi, Eric K
+AU  - Singhi EK
+AD  - Division of Cancer Medicine, University of Texas MD Anderson Cancer Center, 
+      Houston, Texas, USA.
+FAU - Sridhar, Arthi
+AU  - Sridhar A
+AD  - Division of Hematology and Oncology, University of Texas Health Sciences Center 
+      at Houston, Houston, Texas, USA.
+FAU - Faisal, Muhammad Salman
+AU  - Faisal MS
+AD  - Fellow Department of Hematology and Medical Oncology, Roswell Park Cancer 
+      Institute, Buffalo, New York, USA.
+FAU - Desai, Aakash
+AU  - Desai A
+AD  - Division of Medical Oncology, Mayo Clinic, Rochester, New York, USA.
+LA  - eng
+PT  - Journal Article
+DEP - 20221212
+PL  - England
+TA  - Cancer Invest
+JT  - Cancer investigation
+JID - 8307154
+SB  - IM
+MH  - Humans
+MH  - *Carcinoma, Non-Small-Cell Lung/genetics/pathology/therapy
+MH  - Congresses as Topic
+MH  - *Lung Neoplasms/genetics/pathology/therapy
+MH  - *Small Cell Lung Carcinoma/genetics/pathology/therapy
+MH  - Societies, Medical
+MH  - United States
+OTO - NOTNLM
+OT  - non-small cell lung cancer
+OT  - Early-stage lung cancer
+OT  - Small cell lung cancer
+OT  - TKI
+OT  - metastatic lung cancer
+OT  - oncogenes
+EDAT- 2022/08/30 06:00
+MHDA- 2023/01/24 06:00
+CRDT- 2022/08/29 07:52
+PHST- 2022/08/30 06:00 [pubmed]
+PHST- 2023/01/24 06:00 [medline]
+PHST- 2022/08/29 07:52 [entrez]
+AID - 10.1080/07357907.2022.2119479 [doi]
+PST - ppublish
+SO  - Cancer Invest. 2023 Jan;41(1):12-24. doi: 10.1080/07357907.2022.2119479. Epub 
+      2022 Dec 12.
+
+PMID- 40334018
+OWN - NLM
+STAT- MEDLINE
+DCOM- 20250507
+LR  - 20250509
+IS  - 1097-0142 (Electronic)
+IS  - 0008-543X (Print)
+IS  - 0008-543X (Linking)
+VI  - 131
+IP  - 10
+DP  - 2025 May 15
+TI  - Immunotherapy for resectable lung cancer.
+PG  - e35849
+LID - 10.1002/cncr.35849 [doi]
+LID - e35849
+CI  - © 2025 The Author(s). Cancer published by Wiley Periodicals LLC on behalf of 
+      American Cancer Society.
+FAU - Dennehy, Colum
+AU  - Dennehy C
+AD  - Sidney Kimmel Comprehensive Cancer Center, Johns Hopkins University School of 
+      Medicine, Baltimore, Maryland, USA.
+FAU - Conroy, Michael R
+AU  - Conroy MR
+AD  - Sidney Kimmel Comprehensive Cancer Center, Johns Hopkins University School of 
+      Medicine, Baltimore, Maryland, USA.
+FAU - Forde, Patrick M
+AU  - Forde PM
+AD  - Sidney Kimmel Comprehensive Cancer Center, Johns Hopkins University School of 
+      Medicine, Baltimore, Maryland, USA.
+LA  - eng
+PT  - Journal Article
+PT  - Review
+PL  - United States
+TA  - Cancer
+JT  - Cancer
+JID - 0374236
+RN  - 0 (Immune Checkpoint Inhibitors)
+SB  - IM
+MH  - Humans
+MH  - *Lung Neoplasms/immunology/therapy/pathology/drug therapy/mortality
+MH  - *Immunotherapy/methods/adverse effects
+MH  - *Immune Checkpoint Inhibitors/therapeutic use/adverse effects
+MH  - Neoadjuvant Therapy/methods
+PMC - PMC12057804
+OTO - NOTNLM
+OT  - adjuvant
+OT  - immune checkpoint
+OT  - immunotherapy
+OT  - localized
+OT  - lung cancer
+OT  - neoadjuvant
+OT  - non–small cell lung cancer (NSCLC)
+OT  - perioperative
+OT  - resectable
+OT  - surgery
+COIS- Michael R. Conroy reports grant and/or contract funding from the Conquer Cancer 
+      Foundation. Patrick M. Forde reports consulting fees from Amgen, AstraZeneca, 
+      Bristol‐Myers Squibb, Daiichi Sankyo, F‐Star, G1 Therapeutics, Genentech, Iteos, 
+      Janssen, Merck, Mirati, Novartis, Sanofi Pasteur Inc, and Surface Oncology; fees 
+      for data and safety monitoring from Flame Biosciences and Polaris; fess for other 
+      professional activities from LUNGevity Foundation; and research funding from the 
+      National Cancer Institute Cancer Center and Regeneron Pharmaceuticals; and 
+      research funding to Johns Hopkins University from AstraZeneca, Bristol‐Myers 
+      Squibb, Novartis, Corvus, and Kyowa. The other author declares no conflicts of 
+      interest.
+EDAT- 2025/05/07 18:46
+MHDA- 2025/05/07 18:47
+PMCR- 2025/05/07
+CRDT- 2025/05/07 14:12
+PHST- 2025/03/20 00:00 [revised]
+PHST- 2024/09/16 00:00 [received]
+PHST- 2025/03/24 00:00 [accepted]
+PHST- 2025/05/07 18:47 [medline]
+PHST- 2025/05/07 18:46 [pubmed]
+PHST- 2025/05/07 14:12 [entrez]
+PHST- 2025/05/07 00:00 [pmc-release]
+AID - CNCR35849 [pii]
+AID - 10.1002/cncr.35849 [doi]
+PST - ppublish
+SO  - Cancer. 2025 May 15;131(10):e35849. doi: 10.1002/cncr.35849.
+
+PMID- 33208969
+OWN - NLM
+STAT- MEDLINE
+DCOM- 20211027
+LR  - 20211027
+IS  - 1476-4687 (Electronic)
+IS  - 0028-0836 (Linking)
+VI  - 587
+IP  - 7834
+DP  - 2020 Nov
+TI  - Lung cancer.
+PG  - S7
+LID - 10.1038/d41586-020-03152-0 [doi]
+FAU - Brody, Herb
+AU  - Brody H
+LA  - eng
+PT  - Introductory Journal Article
+PL  - England
+TA  - Nature
+JT  - Nature
+JID - 0410462
+SB  - IM
+MH  - Artificial Intelligence
+MH  - Female
+MH  - Humans
+MH  - Liquid Biopsy
+MH  - Lung Neoplasms/*diagnosis/genetics/immunology/*therapy
+MH  - Male
+MH  - Prognosis
+OTO - NOTNLM
+OT  - Cancer
+OT  - Diseases
+OT  - Medical research
+OT  - Therapeutics
+EDAT- 2020/11/20 06:00
+MHDA- 2021/10/28 06:00
+CRDT- 2020/11/19 05:40
+PHST- 2020/11/19 05:40 [entrez]
+PHST- 2020/11/20 06:00 [pubmed]
+PHST- 2021/10/28 06:00 [medline]
+AID - 10.1038/d41586-020-03152-0 [pii]
+AID - 10.1038/d41586-020-03152-0 [doi]
+PST - ppublish
+SO  - Nature. 2020 Nov;587(7834):S7. doi: 10.1038/d41586-020-03152-0.
