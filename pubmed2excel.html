@@ -315,15 +315,15 @@
   }
 
   .badge-xlsx {
-    background: var(--blue-light);
-    color: var(--blue);
-    border: 1px solid var(--blue);
-  }
-
-  .badge-csv {
     background: var(--accent-light);
     color: var(--accent);
     border: 1px solid var(--accent);
+  }
+
+  .badge-csv {
+    background: var(--blue-light);
+    color: var(--blue);
+    border: 1px solid var(--blue);
   }
 
   .csv-options {
@@ -503,11 +503,12 @@
     <div class="format-hints">
       <div class="format-hint">
         <span class="badge badge-xlsx">xlsx</span>
-        全カラムを文字列として扱います。Excelで開いた際に「1-24」→「1月24日」等の自動変換を防止できます。またセルの文字数上限に対応するため，各セルは30,000文字上限で切り詰めます。
+        全カラムを文字列として扱います。Excelで開いた際に「1-24」→「1月24日」等の自動変換を防止できます。<br>
+        またセルの文字数上限に対応するため、各セルは30,000文字上限で切り詰めます。
       </div>
       <div class="format-hint">
         <span class="badge badge-csv">csv</span>
-        非Excel依存。R・Python・Googleスプレッドシートなどの多様な環境で利用する場合はこちら。
+        Excel非依存。様々なソフトで利用できる汎用的な形式で出力します。
       </div>
     </div>
     <div class="status" id="status"></div>
