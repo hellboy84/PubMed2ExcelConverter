@@ -256,12 +256,12 @@
   }
 
   .btn-primary {
-    background: var(--accent);
+    background: var(--blue);
     color: #fff;
   }
 
   .btn-primary:hover:not(:disabled) {
-    background: var(--accent-hover);
+    background: var(--blue-hover);
     box-shadow: var(--shadow-md);
     transform: translateY(-1px);
   }
@@ -272,12 +272,12 @@
   }
 
   .btn-excel {
-    background: var(--blue);
+    background: var(--accent);
     color: #fff;
   }
 
   .btn-excel:hover:not(:disabled) {
-    background: var(--blue-hover);
+    background: var(--accent-hover);
     box-shadow: var(--shadow-md);
     transform: translateY(-1px);
   }
@@ -503,7 +503,7 @@
     <div class="format-hints">
       <div class="format-hint">
         <span class="badge badge-xlsx">xlsx</span>
-        全カラムを文字列として扱います。Excelで開いた際に「1-24」→「1月24日」等の自動変換を防止できます。
+        全カラムを文字列として扱います。Excelで開いた際に「1-24」→「1月24日」等の自動変換を防止できます。またセルの文字数上限に対応するため，各セルは30,000文字上限で切り詰めます。
       </div>
       <div class="format-hint">
         <span class="badge badge-csv">csv</span>
