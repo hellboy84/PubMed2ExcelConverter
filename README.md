@@ -1,12 +1,11 @@
 # PubMed2ExcelConverter
 
-### PubMed 文献リスト Excel/CSV Converter
-
-PubMed からダウンロードした文献リストファイル（.txt / .nbib）を Excel（.xlsx）や CSV（.csv）に変換するブラウザツールです。
+- **「PubMed 文献リスト Excel/CSV Converter」**
+- PubMed からダウンロードした文献リストファイル（.txt / .nbib）を Excel（.xlsx）や CSV（.csv）に変換するHTMLツールです。HTML一個で動作します。
 
 ## 特徴
 
-- 複数のファイルを同時に処理可能です (結果は1ファイルにまとまります)。
+- 複数の文献リストファイルを同時に処理可能です (結果は1ファイルにまとまります)。
 - 重複文献は自動削除されます (PMIDで同定します)。
 - 3万字以上のセルができた場合 (時々ある) 3万字で切り詰めます。
 - 外部へのデータ送信は一切行いません。
