@@ -1,5 +1,7 @@
 # PubMed2ExcelConverter
 
+### PubMed 文献リスト Excel/CSV Converter
+
 PubMed からダウンロードした文献リストファイル（.txt / .nbib）を Excel（.xlsx）や CSV（.csv）に変換するブラウザツールです。
 
 ## 特徴
